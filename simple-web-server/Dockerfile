@@ -2,13 +2,10 @@ FROM python:3.6.2
 
 WORKDIR /app
 
-# Copia o requirements.txt do caminho correto
-COPY ./simple-web-server/requirements.txt .
+# Copia o requirements.txt do caminho correto para o diretório WORKDIR
+COPY ./simple-web-server/simple-web-server/requirements.txt requirements.txt
 
-# Ou, se o arquivo estiver em simple-web-server/simple-web-server/
-# COPY ./simple-web-server/simple-web-server/requirements.txt .
-
-RUN pip install --no-cache-dir -r simple-web-server/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
