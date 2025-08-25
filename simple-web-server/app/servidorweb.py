@@ -4,7 +4,7 @@ import os
 class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
-            self.path = 'templates/index.html'
+            self.path = 'app/templates/index.html'
         return SimpleHTTPRequestHandler.do_GET(self)
 
 def run(server_class=HTTPServer, handler_class=CustomHandler, port=8000):
@@ -14,5 +14,5 @@ def run(server_class=HTTPServer, handler_class=CustomHandler, port=8000):
     httpd.serve_forever()
 
 if __name__ == "__main__":
-    os.chdir(os.path.dirname(__file__))  # Change to the directory of the script
+    os.chdir(os.path.join(os.path.dirname(__file__), '..'))
     run()
