@@ -1,14 +1,10 @@
-FROM python:3.6.2
+FROM httpd:2.4
 
-WORKDIR /app
+# Remove os arquivos de exemplo do httpd
+RUN rm -rf /usr/local/apache2/htdocs/*
 
-RUN pip install --upgrade pip
+# Copia os templates (páginas HTML) para o diretório padrão do Apache
+COPY ./app/templates/ /usr/local/apache2/htdocs/
 
-# Copia o requirements.txt do caminho correto para o diretório WORKDIR
-COPY ./requirements.txt requirements.txt
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD ["python", "app/servidorweb.py"]
+# Copia os arquivos estáticos (ajuste os caminhos se necessário)
+COPY ./assets/ /usr/local/apache2/htdocs/assets/
